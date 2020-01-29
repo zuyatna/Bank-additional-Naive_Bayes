@@ -119,3 +119,20 @@ print("Accuracy score:", accuracy_score(Y_validation, prediction))
 from sklearn.metrics import classification_report
 print("Classification report")
 print(classification_report(Y_validation, prediction))
+
+# confusion matrix
+from sklearn.metrics import confusion_matrix
+print("Confusion Matrix: ")
+print(confusion_matrix(Y_validation, prediction))
+
+conf_max = confusion_matrix(Y_validation, prediction)
+ax = plt.subplot()
+sns.heatmap(conf_max, annot=True, ax=ax, fmt='d')
+
+# labels, title and ticks
+ax.set_xlabel('Prediction labels')
+ax.set_ylabel('True labels')
+ax.set_title('Confusion Matrix')
+ax.xaxis.set_ticklabels(['no', 'yes'])
+ax.yaxis.set_ticklabels(['no', 'yes'])
+plt.show()
