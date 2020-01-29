@@ -8,31 +8,31 @@ dataset = pd.read_csv("bank-additional-full.csv", delim_whitespace=False, header
 dataset = dataset.drop(columns=["duration"])
 
 # view dataset
-print("Shape: ")
-print(dataset.shape)
-print()
-print("Dataset info: ")
-print()
-print(dataset.info())
-
-# class distribution
-print(dataset.groupby("y").size())
-
-# show feature month - last contact month of year and count it
-sns.catplot(x="month", kind="count", data=dataset,
-            order=["mar", "apr", "may", "jun", "jul", "aug", "sep", "nov", "dec"])
-plt.show()
-
-# count subscribed deposit per mont
-ax = sns.countplot(x="month", hue="y", data=dataset,
-                   order=["mar", "apr", "may", "jun", "jul", "aug", "sep", "nov", "dec"])
-plt.show()
-
-# pdays: number of days that passed by after the client was
-# last conctacted from previous campaign (numeric; 99 means client was not previously contacted)
-# count y
-ax = sns.countplot(x="pdays", hue="y", data=dataset)
-plt.show()
+# print("Shape: ")
+# print(dataset.shape)
+# print()
+# print("Dataset info: ")
+# print()
+# print(dataset.info())
+#
+# # class distribution
+# print(dataset.groupby("y").size())
+#
+# # show feature month - last contact month of year and count it
+# sns.catplot(x="month", kind="count", data=dataset,
+#             order=["mar", "apr", "may", "jun", "jul", "aug", "sep", "nov", "dec"])
+# plt.show()
+#
+# # count subscribed deposit per month
+# ax = sns.countplot(x="month", hue="y", data=dataset,
+#                    order=["mar", "apr", "may", "jun", "jul", "aug", "sep", "nov", "dec"])
+# plt.show()
+#
+# # pdays: number of days that passed by after the client was
+# # last conctacted from previous campaign (numeric; 99 means client was not previously contacted)
+# # count y
+# ax = sns.countplot(x="pdays", hue="y", data=dataset)
+# plt.show()
 
 # prepare data
 dataset_enc = dataset.copy()
@@ -100,10 +100,10 @@ model.fit(X_train, Y_train)
 
 prediction = model.predict(X_validation)
 print()
-for x in range(2, len(X_validation)):
-    print(X_validation[x])
-    print(prediction[x])
-    print()
+# for x in range(2, len(X_validation)):
+    # print(X_validation[x])
+    # print(prediction[x])
+    # print()
 
 # finalize model
 from sklearn.ensemble import GradientBoostingClassifier
