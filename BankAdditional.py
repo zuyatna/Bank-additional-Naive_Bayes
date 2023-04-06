@@ -31,32 +31,36 @@ for i in range(0, len(education_encoded)):
 # drop column duration as suggest
 dataset = dataset.drop(columns=["duration"])
 
-# view dataset
-# print("Shape: ")
-# print(dataset.shape)
-# print()
-# print("Dataset info: ")
-# print()
-# print(dataset.info())
-#
-# # class distribution
-# print(dataset.groupby("y").size())
-#
-# # show feature month - last contact month of year and count it
-# sns.catplot(x="month", kind="count", data=dataset,
-#             order=["mar", "apr", "may", "jun", "jul", "aug", "sep", "nov", "dec"])
-# plt.show()
-#
-# # count subscribed deposit per month
-# ax = sns.countplot(x="month", hue="y", data=dataset,
-#                    order=["mar", "apr", "may", "jun", "jul", "aug", "sep", "nov", "dec"])
-# plt.show()
-#
-# # pdays: number of days that passed by after the client was
-# # last conctacted from previous campaign (numeric; 99 means client was not previously contacted)
-# # count y
-# ax = sns.countplot(x="pdays", hue="y", data=dataset)
-# plt.show()
+#view dataset
+print("Shape: ")
+print(dataset.shape)
+print()
+print("Dataset info: ")
+print()
+print(dataset.info())
+
+# class distribution
+print(dataset.groupby("y").size())
+
+# show feature month - last contact month of year and count it
+sns.catplot(x="month", kind="count", data=dataset,
+            order=["mar", "apr", "may", "jun", "jul", "aug", "sep", "nov", "dec"])
+ax = plt.subplot()
+ax.set_title('Customers last contact month of year')
+plt.show()
+
+# count subscribed deposit per month
+ax = sns.countplot(x="month", hue="y", data=dataset,
+                   order=["mar", "apr", "may", "jun", "jul", "aug", "sep", "nov", "dec"])
+plt.gcf().canvas.manager.set_window_title("Subscribed deposit per month")
+plt.show()
+
+# pdays: number of days that passed by after the client was
+# last contacted from previous campaign (numeric; 99 means client was not previously contacted)
+# count y
+ax = sns.countplot(x="pdays", hue="y", data=dataset)
+ax.set_title('pdays: Number of days that passed by after the client was last contacted from previous campaign')
+plt.show()
 
 # prepare data
 dataset_enc = dataset.copy()
@@ -98,7 +102,7 @@ df_majority_downsampled = resample(dataset_majority)
 # balanced dataset
 dataset_downsampled = pd.concat([df_majority_downsampled, dataset_minority])
 dataset_downsampled.y_class.value_counts()
-    # print(dataset_downsampled.y_class.value_counts())
+print(dataset_downsampled.y_class.value_counts())
 
 # evaluate algorithm
 # split-out validation dataset
@@ -117,13 +121,7 @@ scoring = "accuracy"
 
 model = GaussianNB()
 model.fit(X_train, Y_train)
-
 prediction = model.predict(X_validation)
-print()
-# for x in range(2, len(X_validation)):
-    # print(X_validation[x])
-    # print(prediction[x])
-    # print()
 
 # finalize model
 model = GradientBoostingClassifier()
